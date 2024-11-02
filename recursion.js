@@ -41,3 +41,40 @@ function fibsRec(num) {
 }
 
 console.log(`Recursive: ${fibsRec(8)}`);
+
+//merge sort example
+
+function mergeSort(array) {
+  //making sure array has more then one element
+  if (array.length <= 1) {
+    return array;
+  }
+
+  //solitting the array into different parts
+  const mid = Math.floor(array.length / 2);
+  const left = mergeSort(array.slice(0, mid));
+  const right = mergeSort(array.slice(mid));
+
+  //initalizing the sorted array and array indexes
+  let sortedArray = [];
+  let i = 0;
+  let j = 0;
+
+  //sorting and merging the arrays
+  while (i < left.length && j < right.length) {
+    if (left[i] < right[j]) {
+      sortedArray.push(left[i]);
+      i++;
+    } else {
+      sortedArray.push(right[j]);
+      j++;
+    }
+  }
+
+  //returning the sorted array
+  return sortedArray.concat(left.slice(i)).concat(right.slice(j));
+}
+
+console.log(`Merge Sort: ${mergeSort([105, 79, 100, 110])}`)
+
+console.log(`Merge Sort: ${mergeSort([3, 2, 1, 13, 8, 5, 0, 1])}`)
